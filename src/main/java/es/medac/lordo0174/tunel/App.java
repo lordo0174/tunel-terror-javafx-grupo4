@@ -42,7 +42,10 @@ public class App extends Application {
 
         Scene escena = new Scene(raiz, 1280, 800);
         escena.addEventFilter(KeyEvent.KEY_PRESSED, evento -> {
-            if (SALIR.match(evento)) {
+            if (evento.getCode() == KeyCode.F12) {
+                controlador.reiniciar();
+                evento.consume();
+            } else if (SALIR.match(evento)) {
                 Platform.exit();
             }
         });
