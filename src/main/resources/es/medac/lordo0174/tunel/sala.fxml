@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.SVGPath?>
+
+<!-- Sala 5 · El Sótano. Diseñada en Scene Builder y retocada a mano. -->
+<StackPane fx:id="raiz" prefHeight="800.0" prefWidth="1280.0" styleClass="sala" stylesheets="@sala.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.medac.lordo0174.tunel.SalaController">
+   <children>
+      <!-- Escenario de 1280x800: el controlador lo escala para que quepa en cualquier pantalla -->
+      <StackPane fx:id="escenario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0">
+         <children>
+            <!-- Capa 1: el sótano. Los ladrillos de la pared los dibuja el controlador -->
+            <Pane fx:id="pared" mouseTransparent="true" prefHeight="800.0" prefWidth="1280.0" styleClass="pared" />
+            <Region maxHeight="-Infinity" mouseTransparent="true" prefHeight="200.0" styleClass="suelo" StackPane.alignment="BOTTOM_CENTER" />
+
+            <StackPane fx:id="caja" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="430.0" prefWidth="820.0" styleClass="caja">
+               <children>
+                  <!-- Lo que hay detrás de la puerta -->
+                  <Region styleClass="hueco" />
+                  <StackPane fx:id="puerta" styleClass="puerta">
+                     <children>
+                        <Circle radius="7.0" styleClass="remache" StackPane.alignment="TOP_LEFT">
+                           <StackPane.margin>
+                              <Insets left="16.0" top="16.0" />
+                           </StackPane.margin>
+                        </Circle>
+                        <Circle radius="7.0" styleClass="remache" StackPane.alignment="TOP_RIGHT">
+                           <StackPane.margin>
+                              <Insets right="16.0" top="16.0" />
+                           </StackPane.margin>
+                        </Circle>
+                        <Circle radius="7.0" styleClass="remache" StackPane.alignment="BOTTOM_LEFT">
+                           <StackPane.margin>
+                              <Insets bottom="16.0" left="16.0" />
+                           </StackPane.margin>
+                        </Circle>
+                        <Circle radius="7.0" styleClass="remache" StackPane.alignment="BOTTOM_RIGHT">
+                           <StackPane.margin>
+                              <Insets bottom="16.0" right="16.0" />
+                           </StackPane.margin>
+                        </Circle>
+                        <HBox alignment="CENTER" spacing="64.0">
+                           <children>
+                              <!-- Las tres ruedas de la combinación: Spinner con las flechas arriba y abajo (las pone el controlador) -->
+                              <HBox fx:id="panelRuedas" alignment="CENTER" spacing="16.0" styleClass="panel-ruedas">
+                                 <children>
+                                    <Spinner fx:id="rueda1" prefHeight="236.0" prefWidth="118.0" styleClass="rueda" />
+                                    <Spinner fx:id="rueda2" prefHeight="236.0" prefWidth="118.0" styleClass="rueda" />
+                                    <Spinner fx:id="rueda3" prefHeight="236.0" prefWidth="118.0" styleClass="rueda" />
+                                 </children>
+                              </HBox>
+                              <!-- La manivela de la caja: el volante gira al abrir y forcejea al fallar -->
+                              <Button fx:id="botonAbrir" contentDisplay="TOP" defaultButton="true" graphicTextGap="10.0" mnemonicParsing="false" onAction="#abrir" styleClass="manivela" text="ABRIR">
+                                 <graphic>
+                                    <Group fx:id="volante">
+                                       <children>
+                                          <Line endX="62.0" startX="-62.0" styleClass="volante-radio" />
+                                          <Line endX="31.0" endY="53.7" startX="-31.0" startY="-53.7" styleClass="volante-radio" />
+                                          <Line endX="-31.0" endY="53.7" startX="31.0" startY="-53.7" styleClass="volante-radio" />
+                                          <Circle radius="42.0" styleClass="volante-aro" />
+                                          <Circle radius="14.0" styleClass="volante-eje" />
+                                          <Circle centerX="62.0" radius="9.0" styleClass="volante-pomo" />
+                                          <Circle centerX="-62.0" radius="9.0" styleClass="volante-pomo" />
+                                          <Circle centerX="31.0" centerY="53.7" radius="9.0" styleClass="volante-pomo" />
+                                          <Circle centerX="-31.0" centerY="-53.7" radius="9.0" styleClass="volante-pomo" />
+                                          <Circle centerX="-31.0" centerY="53.7" radius="9.0" styleClass="volante-pomo" />
+                                          <Circle centerX="31.0" centerY="-53.7" radius="9.0" styleClass="volante-pomo" />
+                                       </children>
+                                    </Group>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Label styleClass="placa" text="CAJA N.º 5 · 1931" StackPane.alignment="BOTTOM_CENTER">
+                           <StackPane.margin>
+                              <Insets bottom="12.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </children>
+               <StackPane.margin>
+                  <Insets bottom="95.0" top="205.0" />
+               </StackPane.margin>
+            </StackPane>
+
+            <!-- Capa 2: la oscuridad. Solo se ve lo que alumbra la linterna, que sigue al ratón -->
+            <Region fx:id="oscuridad" mouseTransparent="true" />
+
+            <!-- Capa 3: los textos van encima de la oscuridad para que siempre se lean -->
+            <BorderPane mouseTransparent="true">
+               <top>
+                  <VBox alignment="CENTER" spacing="2.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label styleClass="numero-sala" text="SALA 5" />
+                        <Label fx:id="titulo" styleClass="titulo" text="El Sótano" />
+                        <Label styleClass="instrucciones" text="Gira las 3 ruedas con la combinación del diario y pulsa ABRIR" />
+                        <Label styleClass="subinstrucciones" text="(la linterna sigue a tu ratón)" />
+                     </children>
+                     <padding>
+                        <Insets top="14.0" />
+                     </padding>
+                  </VBox>
+               </top>
+               <bottom>
+                  <VBox alignment="CENTER" spacing="6.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="mensaje" alignment="CENTER" minHeight="-Infinity" prefHeight="34.0" prefWidth="1160.0" styleClass="mensaje" text="La bombilla se ha fundido…" />
+                        <ProgressBar fx:id="paciencia" prefHeight="8.0" prefWidth="520.0" progress="1.0" styleClass="paciencia" />
+                        <Label styleClass="etiqueta-paciencia" text="paciencia del vigilante" />
+                     </children>
+                     <padding>
+                        <Insets bottom="14.0" />
+                     </padding>
+                  </VBox>
+               </bottom>
+            </BorderPane>
+
+            <!-- Susto controlado: la cara solo aparece y crece, nunca destella -->
+            <StackPane fx:id="capaSusto" mouseTransparent="true" visible="false">
+               <children>
+                  <Region fx:id="sombraSusto" styleClass="sombra-susto" />
+                  <Group fx:id="cara">
+                     <children>
+                        <SVGPath content="M -190 -110 C -205 -270 205 -270 190 -110 L 215 270 L 150 205 L 115 310 L 62 232 L 0 330 L -62 232 L -115 310 L -150 205 L -215 270 Z" styleClass="cara-pelo" />
+                        <SVGPath content="M 0 -215 C 110 -215 150 -120 145 -20 C 140 90 95 210 0 235 C -95 210 -140 90 -145 -20 C -150 -120 -110 -215 0 -215 Z" styleClass="cara-piel" />
+                        <SVGPath content="M -150 -60 C -150 -200 -60 -238 0 -232 C 60 -238 150 -200 150 -60 C 120 -120 92 -108 70 -150 C 50 -98 22 -118 0 -162 C -22 -118 -50 -98 -70 -150 C -92 -108 -120 -120 -150 -60 Z" styleClass="cara-pelo" />
+                        <SVGPath content="M -98 -22 C -88 -72 -28 -78 -18 -30 C -24 12 -88 18 -98 -22 Z M 98 -22 C 88 -72 28 -78 18 -30 C 24 12 88 18 98 -22 Z" styleClass="cara-hueco" />
+                        <SVGPath content="M -72 2 C -74 44 -66 86 -76 140 L -68 140 C -60 86 -64 44 -60 4 Z M 72 2 C 74 44 66 86 76 140 L 68 140 C 60 86 64 44 60 4 Z" styleClass="cara-lagrima" />
+                        <Circle centerX="-55.0" centerY="-30.0" radius="6.0" styleClass="cara-pupila" />
+                        <Circle centerX="55.0" centerY="-30.0" radius="6.0" styleClass="cara-pupila" />
+                        <SVGPath content="M -12 55 C -16 70 -10 78 -4 72 Z M 12 55 C 16 70 10 78 4 72 Z" styleClass="cara-hueco" />
+                        <SVGPath content="M -38 120 C -30 95 30 95 38 120 C 42 175 20 215 0 218 C -20 215 -42 175 -38 120 Z" styleClass="cara-boca" />
+                     </children>
+                  </Group>
+               </children>
+            </StackPane>
+
+            <!-- Recompensa: la letra de la sala -->
+            <VBox fx:id="capaLetra" alignment="CENTER" spacing="6.0" styleClass="capa-letra" visible="false">
+               <children>
+                  <Label styleClass="letra-intro" text="Dentro de la caja solo hay una letra, escrita con sangre:" />
+                  <Label fx:id="letra" styleClass="letra" text="O" />
+                  <Label fx:id="cuentaReinicio" styleClass="letra-pie" text="El sótano se cerrará en 15 s" />
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+
+      <Region mouseTransparent="true" styleClass="vineta" />
+      <Label fx:id="firma" mouseTransparent="true" styleClass="firma" text="Túnel del Terror · Sala 5" StackPane.alignment="BOTTOM_RIGHT">
+         <StackPane.margin>
+            <Insets bottom="12.0" right="18.0" />
+         </StackPane.margin>
+      </Label>
+   </children>
+</StackPane>

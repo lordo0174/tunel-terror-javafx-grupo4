@@ -1,0 +1,303 @@
+/*
+ * Sala 5 · El Sótano — tema oscuro.
+ * Las fuentes "Creepster" y "Special Elite" se cargan con Font.loadFont en App.
+ */
+
+.root {
+    -fondo: #050403;
+    -hueso: #d3c9b6;
+    -ceniza: #6f665b;
+    -sangre: #8f1015;
+    -sangre-viva: #d42a2a;
+    -laton: #b08a4a;
+    -laton-vivo: #e0b660;
+
+    -fx-font-family: "Special Elite";
+    -fx-font-size: 18px;
+    -fx-base: #1b1714;
+    -fx-background-color: -fondo;
+    -fx-focus-color: -laton-vivo;
+    -fx-faint-focus-color: transparent;
+}
+
+.sala {
+    -fx-background-color: #000000;
+}
+
+.vineta {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 85%, transparent 55%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+/* ---------- el sótano ---------- */
+
+/* El color de fondo es el mortero que queda entre los ladrillos */
+.pared {
+    -fx-background-color: #0b0806;
+}
+
+.suelo {
+    -fx-background-color: linear-gradient(to bottom, #0b0806 0%, #1a1310 6%, #0f0b09 40%, #050303 100%);
+}
+
+/* ---------- la caja fuerte ---------- */
+
+.caja {
+    -fx-background-color: linear-gradient(to bottom, #232722, #121411);
+    -fx-background-radius: 14;
+    -fx-border-color: #050605;
+    -fx-border-width: 3;
+    -fx-border-radius: 14;
+    -fx-padding: 18;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.95), 50, 0.35, 0, 18);
+}
+
+.hueco {
+    -fx-background-color: radial-gradient(center 50% 55%, radius 70%, #4a0808 0%, #160303 50%, #000000 100%);
+    -fx-background-radius: 6;
+}
+
+.puerta {
+    -fx-background-color: linear-gradient(to bottom right, #545a51 0%, #3a3f38 35%, #262a25 75%, #1c1f1b 100%);
+    -fx-background-radius: 6;
+    -fx-border-color: #0d0f0c;
+    -fx-border-width: 2;
+    -fx-border-radius: 6;
+}
+
+.remache {
+    -fx-fill: radial-gradient(center 35% 30%, radius 80%, #9a9d92, #2c2f2a);
+    -fx-stroke: #0d0f0c;
+}
+
+.placa {
+    -fx-text-fill: #8d8a7c;
+    -fx-font-size: 15px;
+    -fx-background-color: #1b1d19;
+    -fx-background-radius: 3;
+    -fx-padding: 2 14 2 14;
+}
+
+.panel-ruedas {
+    -fx-background-color: #070807, linear-gradient(to bottom, #121411, #1e211d);
+    -fx-background-insets: 0, 3;
+    -fx-background-radius: 12, 10;
+    -fx-padding: 16 22 16 22;
+}
+
+/* Cada Spinner es una rueda: flecha arriba, número en un "cilindro" y flecha abajo */
+.rueda {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.rueda .text-field {
+    -fx-font-size: 96px;
+    -fx-alignment: center;
+    -fx-text-fill: #eadfc4;
+    -fx-background-color: linear-gradient(to bottom, #020202 0%, #2a2420 16%, #4d433c 50%, #2a2420 84%, #020202 100%);
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+    -fx-cursor: default;
+    -fx-highlight-fill: transparent;
+    -fx-highlight-text-fill: #eadfc4;
+    -fx-display-caret: false;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.9), 14, 0.2, 0, 0);
+}
+
+.rueda .increment-arrow-button,
+.rueda .decrement-arrow-button {
+    -fx-background-color: #070606, linear-gradient(to bottom, #3b322b, #221c18);
+    -fx-background-insets: 0, 1;
+    -fx-padding: 14 0 14 0;
+    -fx-cursor: hand;
+}
+
+.rueda .increment-arrow-button {
+    -fx-background-radius: 10 10 0 0, 9 9 0 0;
+}
+
+.rueda .decrement-arrow-button {
+    -fx-background-radius: 0 0 10 10, 0 0 9 9;
+}
+
+.rueda .increment-arrow,
+.rueda .decrement-arrow {
+    -fx-background-color: -laton;
+    -fx-padding: 8 15 8 15;
+}
+
+.rueda .increment-arrow-button:hover .increment-arrow,
+.rueda .decrement-arrow-button:hover .decrement-arrow {
+    -fx-background-color: -laton-vivo;
+}
+
+.rueda .increment-arrow-button:pressed,
+.rueda .decrement-arrow-button:pressed {
+    -fx-background-color: #070606, linear-gradient(to bottom, #221c18, #3b322b);
+}
+
+.rueda:focused .text-field {
+    -fx-text-fill: #fff4d8;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.9), 14, 0.2, 0, 0), dropshadow(gaussian, rgba(224, 182, 96, 0.5), 12, 0.2, 0, 0);
+}
+
+/* Al abrirse la caja las ruedas se bloquean, pero no deben verse "apagadas" */
+.rueda:disabled,
+.manivela:disabled {
+    -fx-opacity: 1;
+}
+
+/* ---------- la manivela ---------- */
+
+.manivela {
+    -fx-font-family: "Creepster";
+    -fx-font-size: 40px;
+    -fx-text-fill: -hueso;
+    -fx-background-color: transparent;
+    -fx-padding: 6 18 6 18;
+    -fx-cursor: hand;
+}
+
+.manivela:hover {
+    -fx-text-fill: #ffffff;
+}
+
+.manivela:hover .volante-aro,
+.manivela:hover .volante-radio {
+    -fx-stroke: -laton-vivo;
+}
+
+.manivela:focused {
+    -fx-effect: dropshadow(gaussian, rgba(224, 182, 96, 0.45), 18, 0.2, 0, 0);
+}
+
+.volante-radio {
+    -fx-stroke: -laton;
+    -fx-stroke-width: 7;
+    -fx-stroke-line-cap: round;
+}
+
+.volante-aro {
+    -fx-fill: transparent;
+    -fx-stroke: -laton;
+    -fx-stroke-width: 9;
+}
+
+.volante-eje {
+    -fx-fill: radial-gradient(center 35% 30%, radius 80%, #e7c27a, #5e4520);
+    -fx-stroke: #2a1f0e;
+    -fx-stroke-width: 2;
+}
+
+.volante-pomo {
+    -fx-fill: radial-gradient(center 35% 30%, radius 80%, #f0d08f, #6b4f24);
+    -fx-stroke: #2a1f0e;
+}
+
+/* ---------- textos (siempre por encima de la oscuridad) ---------- */
+
+.numero-sala {
+    -fx-text-fill: -ceniza;
+    -fx-font-size: 20px;
+}
+
+.titulo {
+    -fx-font-family: "Creepster";
+    -fx-font-size: 80px;
+    -fx-text-fill: -sangre-viva;
+    -fx-effect: dropshadow(gaussian, rgba(212, 42, 42, 0.55), 30, 0.2, 0, 0);
+}
+
+.instrucciones {
+    -fx-text-fill: -hueso;
+    -fx-font-size: 24px;
+}
+
+.subinstrucciones {
+    -fx-text-fill: -ceniza;
+    -fx-font-size: 17px;
+}
+
+.mensaje {
+    -fx-text-fill: #bcb19e;
+    -fx-font-size: 22px;
+}
+
+.paciencia .track {
+    -fx-background-color: #110d0b;
+    -fx-background-radius: 4;
+}
+
+.paciencia .bar {
+    -fx-background-color: linear-gradient(to right, #4d0808, #a3161b);
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+}
+
+.etiqueta-paciencia {
+    -fx-text-fill: #4f4740;
+    -fx-font-size: 14px;
+}
+
+.firma {
+    -fx-text-fill: #3b332d;
+    -fx-font-size: 14px;
+}
+
+/* ---------- el susto (cara dibujada con SVGPath) ---------- */
+
+.sombra-susto {
+    -fx-background-color: rgba(0, 0, 0, 0.85);
+}
+
+.cara-pelo {
+    -fx-fill: #070505;
+    -fx-stroke: #161111;
+}
+
+.cara-piel {
+    -fx-fill: radial-gradient(center 50% 38%, radius 65%, #a3a695 0%, #6c7163 55%, #262922 100%);
+}
+
+.cara-hueco {
+    -fx-fill: #030202;
+}
+
+.cara-lagrima {
+    -fx-fill: #2b0404;
+}
+
+.cara-pupila {
+    -fx-fill: #e01b1b;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.9), 12, 0.5, 0, 0);
+}
+
+.cara-boca {
+    -fx-fill: #020101;
+    -fx-stroke: #2e0606;
+    -fx-stroke-width: 3;
+}
+
+/* ---------- la letra ---------- */
+
+.capa-letra {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 70%, #1a0707 0%, #050303 70%);
+}
+
+.letra-intro {
+    -fx-text-fill: -hueso;
+    -fx-font-size: 28px;
+}
+
+/* La letra va en Special Elite: tiene que leerse sin dudas, la de Creepster se emborrona */
+.letra {
+    -fx-font-size: 320px;
+    -fx-text-fill: -sangre-viva;
+}
+
+.letra-pie {
+    -fx-text-fill: -ceniza;
+    -fx-font-size: 20px;
+}
