@@ -60,6 +60,13 @@ public class App extends Application {
         controlador.iniciar();
     }
 
+    @Override
+    public void stop() {
+        if (controlador != null) {
+            controlador.apagar();
+        }
+    }
+
     private static void cargarFuente(String archivo) {
         try (InputStream entrada = App.class.getResourceAsStream("fuentes/" + archivo)) {
             if (entrada == null || Font.loadFont(entrada, 20) == null) {
