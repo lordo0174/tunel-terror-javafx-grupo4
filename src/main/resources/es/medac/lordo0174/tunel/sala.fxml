@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.SVGPath?>
 
-<!-- Sala 5 · El Sótano. Diseñada en Scene Builder y retocada a mano. -->
+<!-- Sala 5 · El Sótano. Se abre y se edita con Scene Builder; el orden de capas y los comentarios están retocados a mano. -->
 <StackPane fx:id="raiz" prefHeight="800.0" prefWidth="1280.0" styleClass="sala" stylesheets="@sala.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.medac.lordo0174.tunel.SalaController">
    <children>
       <!-- Escenario de 1280x800: el controlador lo escala para que quepa en cualquier pantalla -->
